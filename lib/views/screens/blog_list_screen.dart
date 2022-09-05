@@ -26,13 +26,15 @@ class _BlogsListScreenState extends ConsumerState<BlogsListScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: blogsListState is BlogsListSuccessState
+      body: blogsListState is BlogsListSuccessState && blogsList.isNotEmpty
           ? ListView.builder(
               itemCount: blogsList.length,
               itemBuilder: (BuildContext context, int index) {
                 return BlogCard(blogModel: blogsList[index]);
               },
             )
+          : blogsList.isEmpty
+          ? const Center(child:  Text('No Data Found'))
           : const Center(child: CircularProgressIndicator()),
     );
   }
